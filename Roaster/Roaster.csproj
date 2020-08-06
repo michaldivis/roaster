@@ -2,6 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/michaldivis/roaster</RepositoryUrl>
+    <PackageReleaseNotes>Initial release, basic version</PackageReleaseNotes>
+    <Description>A helper library for working with REST APIs in C#</Description>
+    <PackageId>Divis.Roaster</PackageId>
+    <Authors>Michal Diviš</Authors>
+    <Company>Michal Diviš</Company>
+    <Copyright>2020 @ Michal Diviš</Copyright>
   </PropertyGroup>
 
   <ItemGroup>

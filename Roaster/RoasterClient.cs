@@ -43,9 +43,9 @@ namespace Roaster
         /// <typeparam name="T">Type of the result</typeparam>
         /// <param name="uri">The POST call URI</param>
         /// <returns></returns>
-        public async Task<WebResult<T>> GetPostResultAsync<T>(string uri)
+        public async Task<WebResult<T>> PostResultAsync<T>(string uri)
         {
-            return await GetPostResultAsync<T>(uri, new Dictionary<string, string>());
+            return await PostResultAsync<T>(uri, new Dictionary<string, string>());
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace Roaster
         /// <param name="uri">The POST call URI</param>
         /// <param name="headerValues">The values to be passed in the header</param>
         /// <returns></returns>
-        public async Task<WebResult<T>> GetPostResultAsync<T>(string uri, Dictionary<string, string> headerValues)
+        public async Task<WebResult<T>> PostResultAsync<T>(string uri, Dictionary<string, string> headerValues)
         {
             HttpResponseMessage response = null;
             string responseText = null;
@@ -66,6 +66,39 @@ namespace Roaster
                     var content = new FormUrlEncodedContent(headerValues);
 
                     response = await client.PostAsync(uri, content);
+
+                    responseText = await response.Content.ReadAsStringAsync();
+
+                    var result = JsonConvert.DeserializeObject<T>(responseText);
+
+                    return new WebResult<T>
+                    {
+                        Status = ResultStatus.Success,
+                        Result = result
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                return await ProcessError<T>(response, responseText, ex);
+            }
+        }
+
+        /// <summary>
+        /// Returns an awaitable result from a GET call
+        /// </summary>
+        /// <typeparam name="T">Type of the result</typeparam>
+        /// <param name="uri">The GET call URI</param>
+        /// <returns></returns>
+        public async Task<WebResult<T>> GetResultAsync<T>(string uri)
+        {
+            HttpResponseMessage response = null;
+            string responseText = null;
+            try
+            {
+                using (var client = new HttpClient() { Timeout = _timeout })
+                {
+                    response = await client.GetAsync(uri);
 
                     responseText = await response.Content.ReadAsStringAsync();
 

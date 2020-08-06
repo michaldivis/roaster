@@ -1,6 +1,7 @@
 ﻿using Roaster.Enums;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -12,23 +13,28 @@ namespace Roaster.Sample
 
         static async Task Main(string[] args)
         {
-            WriteLog("Running the default client with a valid URI");
-            await UseDefaultClient(_testApiUri);
+            WriteLog("Running the default client (GET) with a valid URI");
+            await UseDefaultClientGet(_testApiUri);
 
             Console.WriteLine();
 
-            WriteLog("Running the default client with an invalid URI");
-            await UseDefaultClient("invalid uri");
+            WriteLog("Running the default client (POST) with a valid URI");
+            await UseDefaultClientPost(_testApiUri);
 
             Console.WriteLine();
 
-            WriteLog("Running the customized client with a valid URI");
-            await UseCustomizedClient(_testApiUri);
+            WriteLog("Running the default client (POST) with an invalid URI");
+            await UseDefaultClientPost("invalid uri");
 
             Console.WriteLine();
 
-            WriteLog("Running the customized client with an invalid URI");
-            await UseCustomizedClient("invalid uri");
+            WriteLog("Running the customized client (POST) with a valid URI");
+            await UseCustomizedClientPost(_testApiUri);
+
+            Console.WriteLine();
+
+            WriteLog("Running the customized client (POST) with an invalid URI");
+            await UseCustomizedClientPost("invalid uri");
 
             Console.WriteLine();
 
@@ -36,7 +42,27 @@ namespace Roaster.Sample
             Console.ReadKey();
         }
 
-        private static async Task UseDefaultClient(string uri)
+        private static async Task UseDefaultClientGet(string uri)
+        {
+            var defaultClient = new RoasterClient();
+
+            var userDetailsRequest = await defaultClient.GetResultAsync<IEnumerable<Photo>>(uri);
+
+            if (userDetailsRequest.Status == ResultStatus.Success)
+            {
+                Console.WriteLine($"Successfully downloaded {userDetailsRequest.Result.Count()} photos");
+            }
+            else if (userDetailsRequest.Status == ResultStatus.Unauthorized)
+            {
+                Console.WriteLine("You are unauthorized, try logging in first.");
+            }
+            else
+            {
+                Console.WriteLine(userDetailsRequest.Message);
+            }
+        }
+
+        private static async Task UseDefaultClientPost(string uri)
         {
             var defaultClient = new RoasterClient();
 
@@ -48,7 +74,7 @@ namespace Roaster.Sample
                 { "thumbnailUrl", "https://via.placeholder.com/150/92c952"}
             };
 
-            var userDetailsRequest = await defaultClient.GetPostResultAsync<Photo>(uri, postData);
+            var userDetailsRequest = await defaultClient.PostResultAsync<Photo>(uri, postData);
 
             if(userDetailsRequest.Status == ResultStatus.Success)
             {
@@ -63,7 +89,7 @@ namespace Roaster.Sample
             }
         }
 
-        private static async Task UseCustomizedClient(string uri)
+        private static async Task UseCustomizedClientPost(string uri)
         {
             var defaultClient = new CustomizedRoasterClient();
 
@@ -75,7 +101,7 @@ namespace Roaster.Sample
                 { "thumbnailUrl", "https://via.placeholder.com/150/92c952"}
             };
 
-            var userDetailsRequest = await defaultClient.GetPostResultAsync<Photo>(uri, postData);
+            var userDetailsRequest = await defaultClient.PostResultAsync<Photo>(uri, postData);
 
             if (userDetailsRequest.Status == ResultStatus.Success)
             {

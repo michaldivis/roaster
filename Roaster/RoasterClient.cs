@@ -8,31 +8,30 @@ using System.Threading.Tasks;
 
 namespace Roaster
 {
+    /// <summary>
+    /// A helper class for working with REST APIs
+    /// </summary>
     public class RoasterClient
     {
         private TimeSpan _timeout;
 
-        #region Creators
+        #region Constructors
+
         /// <summary>
         /// Creates a new instance of the RoasterClient with a specific timeout setting
         /// </summary>
         /// <param name="timeout">The HttpClient timeout setting</param>
         /// <returns></returns>
-        public static RoasterClient Create(TimeSpan timeout)
+        public RoasterClient(TimeSpan timeout)
         {
-            return new RoasterClient
-            {
-                _timeout = timeout
-            };
+            _timeout = timeout;
         }
+
         /// <summary>
         /// Creates a new instance of the RoasterClient with the default timeout setting
         /// </summary>
         /// <returns></returns>
-        public static RoasterClient Create()
-        {
-            return Create(TimeSpan.FromSeconds(100));
-        }
+        public RoasterClient() : this(TimeSpan.FromSeconds(100)) { }
 
         #endregion
 

@@ -1,6 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Roaster.Enums;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Roaster.Tests

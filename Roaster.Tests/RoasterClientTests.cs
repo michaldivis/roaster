@@ -10,9 +10,9 @@ namespace Roaster.Tests
         [TestMethod]
         public async Task GetPostResultAsync_NonExistingUri_ReturnsFailureAndException()
         {
-            var roaster = RoasterClient.Create();
+            var roaster = new RoasterClient();
 
-            var result = await roaster.GetPostResultAsync<string>(null);
+            var result = await roaster.PostResultAsync<string>(null);
 
             Assert.IsNotNull(result.Exception);
             Assert.AreEqual(ResultStatus.Failure, result.Status);

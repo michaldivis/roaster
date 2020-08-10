@@ -5,23 +5,27 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/michaldivis/roaster</RepositoryUrl>
-    <PackageReleaseNotes>Additions
-+ added a GetResultAsync (http GET) method to RoasterClient
-
-Changes
-* replaced RoasterClient's static Create method with a regular constructor
-* renamed GetPostResultAsync to PostResultAsync in RoasterClient</PackageReleaseNotes>
+    <PackageReleaseNotes>+ nuget package icon</PackageReleaseNotes>
     <Description>A helper library for working with REST APIs in C#</Description>
     <PackageId>Divis.Roaster</PackageId>
     <Authors>Michal Diviš</Authors>
     <Company>Michal Diviš</Company>
     <Copyright>2020 @ Michal Diviš</Copyright>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <FileVersion>1.0.11.0</FileVersion>
+    <PackageIcon></PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <PackageIcon>blueChicken_128.png</PackageIcon>
+    <AssemblyVersion>1.0.2.0</AssemblyVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="Images\blueChicken_128.png" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>

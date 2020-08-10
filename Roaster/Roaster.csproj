@@ -5,14 +5,14 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/michaldivis/roaster</RepositoryUrl>
-    <PackageReleaseNotes>+ nuget package icon</PackageReleaseNotes>
+    <PackageReleaseNotes>+ renamed a few classes</PackageReleaseNotes>
     <Description>A helper library for working with REST APIs in C#</Description>
     <PackageId>Divis.Roaster</PackageId>
     <Authors>Michal Diviš</Authors>
     <Company>Michal Diviš</Company>
     <Copyright>2020 @ Michal Diviš</Copyright>
-    <Version>1.0.2</Version>
-    <FileVersion>1.0.11.0</FileVersion>
+    <Version>1.0.3</Version>
+    <FileVersion>1.0.3.0</FileVersion>
     <PackageIcon></PackageIcon>
   </PropertyGroup>
 
@@ -22,7 +22,7 @@
 
   <PropertyGroup>
     <PackageIcon>blueChicken_128.png</PackageIcon>
-    <AssemblyVersion>1.0.2.0</AssemblyVersion>
+    <AssemblyVersion>1.0.3.0</AssemblyVersion>
   </PropertyGroup>
   <ItemGroup>
     <None Include="Images\blueChicken_128.png" Pack="true" PackagePath="\" />

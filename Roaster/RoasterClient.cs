@@ -43,7 +43,7 @@ namespace Roaster
         /// <typeparam name="T">Type of the result</typeparam>
         /// <param name="uri">The POST call URI</param>
         /// <returns></returns>
-        public async Task<WebResult<T>> PostResultAsync<T>(string uri)
+        public async Task<RoasterResult<T>> PostResultAsync<T>(string uri)
         {
             return await PostResultAsync<T>(uri, new Dictionary<string, string>());
         }
@@ -55,7 +55,7 @@ namespace Roaster
         /// <param name="uri">The POST call URI</param>
         /// <param name="headerValues">The values to be passed in the header</param>
         /// <returns></returns>
-        public async Task<WebResult<T>> PostResultAsync<T>(string uri, Dictionary<string, string> headerValues)
+        public async Task<RoasterResult<T>> PostResultAsync<T>(string uri, Dictionary<string, string> headerValues)
         {
             HttpResponseMessage response = null;
             string responseText = null;
@@ -71,10 +71,10 @@ namespace Roaster
 
                     var result = JsonConvert.DeserializeObject<T>(responseText);
 
-                    return new WebResult<T>
+                    return new RoasterResult<T>
                     {
                         Status = ResultStatus.Success,
-                        Result = result
+                        Data = result
                     };
                 }
             }
@@ -90,7 +90,7 @@ namespace Roaster
         /// <typeparam name="T">Type of the result</typeparam>
         /// <param name="uri">The GET call URI</param>
         /// <returns></returns>
-        public async Task<WebResult<T>> GetResultAsync<T>(string uri)
+        public async Task<RoasterResult<T>> GetResultAsync<T>(string uri)
         {
             HttpResponseMessage response = null;
             string responseText = null;
@@ -104,10 +104,10 @@ namespace Roaster
 
                     var result = JsonConvert.DeserializeObject<T>(responseText);
 
-                    return new WebResult<T>
+                    return new RoasterResult<T>
                     {
                         Status = ResultStatus.Success,
-                        Result = result
+                        Data = result
                     };
                 }
             }
@@ -129,9 +129,9 @@ namespace Roaster
         /// <param name="responseText">Parsed response text</param>
         /// <param name="ex">Exception thrown</param>
         /// <returns></returns>
-        protected virtual async Task<WebResult<T>> ProcessError<T>(HttpResponseMessage response, string responseText, Exception ex)
+        protected virtual async Task<RoasterResult<T>> ProcessError<T>(HttpResponseMessage response, string responseText, Exception ex)
         {
-            return new WebResult<T>
+            return new RoasterResult<T>
             {
                 Status = ResultStatus.Failure,
                 Message = "Error",

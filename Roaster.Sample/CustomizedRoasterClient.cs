@@ -8,11 +8,11 @@ namespace Roaster.Sample
 {
     public class CustomizedRoasterClient : RoasterClient
     {
-        protected override async Task<WebResult<T>> ProcessError<T>(HttpResponseMessage response, string responseText, Exception ex)
+        protected override async Task<RoasterResult<T>> ProcessError<T>(HttpResponseMessage response, string responseText, Exception ex)
         {
             if (response?.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                return new WebResult<T>
+                return new RoasterResult<T>
                 {
                     Exception = ex,
                     Message = "It's all good",
@@ -20,7 +20,7 @@ namespace Roaster.Sample
                 };
             }
 
-            return new WebResult<T>
+            return new RoasterResult<T>
             {
                 Exception = ex,
                 Message = "Custom error message",

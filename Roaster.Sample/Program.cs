@@ -50,7 +50,7 @@ namespace Roaster.Sample
 
             if (userDetailsRequest.Status == ResultStatus.Success)
             {
-                Console.WriteLine($"Successfully downloaded {userDetailsRequest.Result.Count()} photos");
+                Console.WriteLine($"Successfully downloaded {userDetailsRequest.Data.Count()} photos");
             }
             else if (userDetailsRequest.Status == ResultStatus.Unauthorized)
             {
@@ -78,7 +78,7 @@ namespace Roaster.Sample
 
             if(userDetailsRequest.Status == ResultStatus.Success)
             {
-                Console.WriteLine($"Successfully created a photo with Id = {userDetailsRequest.Result.Id}");
+                Console.WriteLine($"Successfully created a photo with Id = {userDetailsRequest.Data.Id}");
             }else if(userDetailsRequest.Status == ResultStatus.Unauthorized)
             {
                 Console.WriteLine("You are unauthorized, try logging in first.");
@@ -105,7 +105,7 @@ namespace Roaster.Sample
 
             if (userDetailsRequest.Status == ResultStatus.Success)
             {
-                Console.WriteLine($"Successfully created a photo with Id = {userDetailsRequest.Result.Id}");
+                Console.WriteLine($"Successfully created a photo with Id = {userDetailsRequest.Data.Id}");
             }
             else if (userDetailsRequest.Status == ResultStatus.Unauthorized)
             {

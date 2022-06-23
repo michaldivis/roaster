@@ -1,7 +1,7 @@
 # Roaster
 A helper library for working with RESTful APIs in C#
 
-**⚠️WARNING:** This project is not maintained anymore. I strongly suggest you use [RestSharp](https://restsharp.dev/) instead.
+**⚠️WARNING:** This project is not maintained anymore. Use [RestSharp](https://restsharp.dev/) instead.
 
 ## NuGet
 
